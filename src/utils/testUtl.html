@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./common.js"></script>
+    <style>
+        @keyframes animate {
+            from {
+                transform: translate(100%);
+            }
+
+            to {
+                transform: translate(-100%);
+            }
+        }
+
+        @keyframes animate2 {
+            from {
+                transform: translate(0);
+            }
+
+            to {
+                transform: translate(-200%);
+            }
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #111;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            width: 700px;
+            overflow: hidden;
+            color: white;
+            mask-image: linear-gradient(90deg, transparent, #fff, 20%, #fff, 80%, transparent);
+            /* background: linear-gradient(90deg, red, yellow, green, blue); */
+        }
+
+        .item {
+            height: 200px;
+        }
+
+        .container div {
+            white-space: nowrap;
+            border: 2px solid green
+        }
+
+        .container div:nth-child(1) {
+            animation: animate var(--t) linear infinite;
+        }
+
+        .container div:nth-child(2) {
+            animation: animate2 var(--t) linear infinite;
+            /* -2表示原本的延迟执行变为提前执行 */
+            animation-delay: calc( var(--t) / -2 );
+        }
+
+        .container div span {
+            display: inline-flex;
+            margin: 10px;
+            letter-spacing: .2em;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>ddddddddddhhhhhh</div>
+    <script>
+        // console.log("concurRequest", concurRequest)
+
+        const urls = []
+        for (let i = 0; i < 100; i++) {
+            urls.push(`https://jsonplaceholder.typicode.com/todos/${i}`)
+        }
+
+        // let a = 1;
+
+        async function a() {
+            let res = await concurRequest(urls, 20).then(res => {
+
+                console.log("res====>", res);
+            })
+
+        }
+        // let res = await concurRequest(urls, 20).then(res => {
+        //     console.log(res);
+        // })
+        // console.log(res)
+        // a();
+    </script>
+    '
+    <div class="container" style="--t: 20s">
+        <div class="item">
+            <span>第一个元素</span>
+            <span>CSS</span>
+            <span>JavvaScript</span>
+            <span>Lua</span>
+            <span>Java</span>
+            <span>SpringBoot</span>
+        </div>
+        <div class="item">
+            <span>第二个元素</span>
+            <span>CSS</span>
+            <span>JavvaScript</span>
+            <span>Lua</span>
+            <span>Java</span>
+            <span>SpringBoot</span>
+        </div>
+    </div>
+
+</body>
+
+</html>
